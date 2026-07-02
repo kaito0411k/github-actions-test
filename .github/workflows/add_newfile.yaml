@@ -1,0 +1,25 @@
+name: Create File
+
+on:
+  workflow_dispatch:
+
+jobs:
+  create-file:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create file
+        run: |
+          echo "こんにちは" > test.txt
+
+      - name: Commit and Push
+        run: |
+          date > report.txt
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+
+          git add test.txt
+          git commit -m "Add test.txt"
+          git push
